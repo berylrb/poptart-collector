@@ -9,4 +9,5 @@ urlpatterns = [
   path('poptarts/create/', views.PoptartCreate.as_view(), name='poptarts_create'),
   path('poptarts/<int:pk>/update/', views.PoptartUpdate.as_view(), name='poptarts_update'),
   path('poptarts/<int:pk>/delete/', views.PoptartDelete.as_view(), name='poptarts_delete'),
+  path('poptarts/<int:poptart_id>/add_feeling/', views.add_feeling, name='add_feeling'),
 ]

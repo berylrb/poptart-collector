@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Poptart
-
+from .forms import EmotionForm
 
 
 class PoptartCreate(CreateView):
@@ -29,6 +29,14 @@ def poptarts_index(request):
 
 def poptarts_detail(request, poptart_id):
   poptart = Poptart.objects.get(id=poptart_id)
-  return render(request, 'poptarts/detail.html', { 'poptart': poptart })
+  emotion_form = EmotionForm()
+  return render(request, 'poptarts/detail.html', { 'poptart': poptart, 'emotion_form': emotion_form })
 
+def add_feeling(request, poptart_id):
+  form = EmotionForm(request.POST)
+  if form.is_valid():
+    new_feeling = form.save(commit=False)
+    new_feeling.poptart_id = poptart_id
+    new_feeling.save()
+  return redirect('poptarts_detail', poptart_id=poptart_id)
 
