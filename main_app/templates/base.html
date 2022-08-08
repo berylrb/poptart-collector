@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-  <title>Cat Collector</title>
+  <title>Poptart Collector</title>
   {% block head %}
   {% endblock %}
 </head>
@@ -20,11 +20,18 @@
     </div>
     <nav>
       <ul>
-        <li><a href="{% url 'poptarts_index' %}">All Poptarts</a></li>
-        <li><a href="{% url 'toppings_index' %}">All Toppings</a></li>
-        <li><a href="{% url 'poptarts_create' %}">Add a Poptart</a></li>
-        <li><a href="{% url 'toppings_create' %}">Add a Topping</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'poptarts_index' %}">All Poptarts</a></li>
+          <li><a href="{% url 'toppings_index' %}">All Toppings</a></li>
+          <li><a href="{% url 'poptarts_create' %}">Add a Poptart</a></li>
+          <li><a href="{% url 'toppings_create' %}">Add a Topping</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'logout' %}">Log out</a></li>
+          {% else %}
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'home' %}">Login</a></li>
+          {% endif %}
       </ul>
     </nav>
   </header>
