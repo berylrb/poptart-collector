@@ -8,9 +8,20 @@ FEELINGS = (
   ('S', 'Satisfied')
 )
 
+class Topping(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.name
+
+  def get_absolute_url(self):
+    return reverse('toppings_detail', kwargs={'pk': self.id})
+
 class Poptart(models.Model):
   flavor = models.CharField(max_length=100)
   description = models.TextField(max_length=250)
+  toppings = models.ManyToManyField(Topping)
 
   def __str__(self):
     return self.flavor
@@ -40,12 +51,3 @@ class Emotion(models.Model):
     ordering = ['-date']
 
 
-class Topping(models.Model):
-  name = models.CharField(max_length=50)
-  color = models.CharField(max_length=20)
-
-  def __str__(self):
-    return self.name
-
-  def get_absolute_url(self):
-    return reverse('toppings_detail', kwargs={'pk': self.id})

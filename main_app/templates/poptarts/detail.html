@@ -41,6 +41,7 @@
 </section>
 <div class="feedings-toy-container">
   <section class="feedings">
+      <div class="subsection-content">
     <div class="subsection-title">
       <h2>Emotions</h2>
       <img 
@@ -92,6 +93,57 @@
     </div>
   {% endif %}
   </section>
+  <section class="toys">
+    <div class="subsection-title">
+      <h2>Toppings</h2>
+      <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
+      <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
+      <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
+    </div>
+    <h3>{{ poptart.flavor }}'s Toppings</h3>
+    <div class="subsection-content">
+      {% if poptart.toppings.count %}
+        {% for topping in poptart.toppings.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ topping.color }}"
+            ></div>
+            <a href="{% url 'toppings_detail' topping.id %}">
+              <p>{{ topping.color }} {{ topping.name }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-toys">{{poptart.flavor}} is currently toppingless (topless?)</p>
+      {% endif %}
+    </div>
+    <h3>Available Toppings</h3>
+    <div class="subsection-content">
+      {% if toppings.count %}
+        {% for topping in toppings.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ topping.color }}"
+            ></div>
+            <a href="{% url 'toppings_detail' topping.id %}">
+              <p>{{ topping.color }} {{ topping.name }}</p>
+            </a>
+            <form action="{% url 'assoc_topping' poptart.id topping.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn submit">Give topping</button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="all-toys">
+          {{poptart.flavor}} already has all the available toppings 🥳
+        </p>
+      {% endif %}
+    </div>
+  </section>
+</div>
 </div>
 
 

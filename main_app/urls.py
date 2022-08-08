@@ -10,6 +10,7 @@ urlpatterns = [
   path('poptarts/<int:pk>/update/', views.PoptartUpdate.as_view(), name='poptarts_update'),
   path('poptarts/<int:pk>/delete/', views.PoptartDelete.as_view(), name='poptarts_delete'),
   path('poptarts/<int:poptart_id>/add_feeling/', views.add_feeling, name='add_feeling'),
+  path('poptarts/<int:poptart_id>/assoc_topping/<int:topping_id>/', views.assoc_topping, name='assoc_topping'),
   path('toppings/create/', views.ToppingCreate.as_view(), name='toppings_create'),
   path('toppings/<int:pk>/', views.ToppingDetail.as_view(), name='toppings_detail'),
   path('toppings/', views.ToppingList.as_view(), name='toppings_index'),
