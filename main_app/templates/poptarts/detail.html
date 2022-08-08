@@ -21,6 +21,12 @@
   <div class="cat-details">
     <h1>{{ poptart.flavor }}</h1>
     <p>{{ poptart.description }}</p>
+    <div class="cat-actions">
+      <a href="{% url 'poptarts_update' poptart.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'poptarts_delete' poptart.id %}" class="btn danger">Delete</a>
+    </div>
+  </div>
+</section>
   </div>
 </section>
 

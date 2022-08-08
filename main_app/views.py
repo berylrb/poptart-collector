@@ -1,7 +1,21 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Poptart
+
+
+
+class PoptartCreate(CreateView):
+  model = Poptart
+  fields = '__all__'
+
+class PoptartUpdate(UpdateView):
+  model = Poptart
+  fields = ['flavor', 'description']
+
+class PoptartDelete(DeleteView):
+  model = Poptart
+  success_url = '/poptarts/'
 
 def home(request):
   return HttpResponse('<h1>Hi</h1>')
@@ -18,10 +32,3 @@ def poptarts_detail(request, poptart_id):
   return render(request, 'poptarts/detail.html', { 'poptart': poptart })
 
 
-
-# poptarts = [
-#   Poptart('Strawberry', "A true classic. Kind of boring but also she's always there for you"),
-#   Poptart('Brown Sugar Cinnamon', "Everyone's favorite and she knows it."),
-#   Poptart('Wild Berry', "Strawberry's cooky cousin."),
-#   Poptart('Hot Fudge Sundae', "A truly decadent choice for breakfast. Kind of a red flag honestly.")
-# ]
