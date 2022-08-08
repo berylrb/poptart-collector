@@ -23,7 +23,7 @@
   {% for poptart in poptarts %}
     <div class="card">
       {% comment %} Add this line {% endcomment %}
-      <a href="/poptarts/{{ poptart.id }}">
+      <a href="{% url 'poptarts_detail' poptart.id %}">
         <div class="card-content">
           <div class="card-img-container">
             <img 
