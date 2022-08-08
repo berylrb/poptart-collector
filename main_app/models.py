@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 FEELINGS = (
   ('R', 'Regret'),
@@ -16,6 +17,9 @@ class Poptart(models.Model):
 
   def get_absolute_url(self):
       return reverse("poptarts_detail", kwargs={"poptart_id": self.id})
+    
+  def enough_for_today(self):
+    return self.emotion_set.filter(date=date.today()).count() >= len(FEELINGS)
 
 
 
@@ -36,5 +40,12 @@ class Emotion(models.Model):
     ordering = ['-date']
 
 
+class Topping(models.Model):
+  name = models.CharField(max_length=50)
+  color = models.CharField(max_length=20)
 
+  def __str__(self):
+    return self.name
 
+  def get_absolute_url(self):
+    return reverse('toppings_detail', kwargs={'pk': self.id})

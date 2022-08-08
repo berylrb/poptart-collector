@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/toppings/topping-detail.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+  
+<div class="card" style="border-color: {{ topping.color }}">
+  <div class="card-bg" style="background-color: {{ topping.color }}"></div>
+  <div class="card-content">
+    <h2>A {{ topping.color }} {{ topping.name }} topping</h2>
+  </div>
+</div>
+<a href="{% url 'toppings_update' topping.id %}" class="btn warn">Edit</a>
+<a href="{% url 'toppings_delete' topping.id %}" class="btn danger">Delete</a>
+
+{% endblock %}

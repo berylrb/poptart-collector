@@ -62,6 +62,11 @@
       method="post" 
       class="subsection-content"
     >
+    {% if poptart.enough_for_today %}
+        <p class="fed">For goodness sake stop eating {{poptart.flavor}} poptarts!</p>
+      {% else %}
+        <p class="unfed">{{poptart.flavor}} might make you feel something, who knows!</p>
+      {% endif %}
       {% csrf_token %}
       {{ emotion_form.as_p }}
       <button type="submit" class="btn submit">Add Feeling</button>

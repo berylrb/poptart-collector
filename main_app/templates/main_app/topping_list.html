@@ -1,0 +1,35 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/toppings/topping-index.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>All Poptart Toppings</h1>
+  <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
+  <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
+  <img src="{% static 'images/post.svg' %}" alt="A scratching post" />
+  <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
+</section>
+
+<section class="card-container">
+  {% for topping in topping_list %}
+  <div class="card" style="border-color: {{ topping.color }}">
+    <div class="card-bg" style="background-color: {{ topping.color }}"></div>
+    <a href="{% url 'toppings_detail' topping.id %}">
+      <div class="card-content">
+        <h2>A {{ topping.color }} {{ topping.name }} topping</h2>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

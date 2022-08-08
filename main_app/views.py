@@ -1,13 +1,27 @@
 from django.shortcuts import render, redirect
-
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Poptart
+from .models import Poptart, Topping
 from .forms import EmotionForm
 
+class ToppingList(ListView):
+  model = Topping
+
+class ToppingDetail(DetailView):
+  model = Topping
+
+class ToppingUpdate(UpdateView):
+  model = Topping
+  fields = ['name', 'color']
+
+class ToppingDelete(DeleteView):
+  model = Topping
+  success_url = '/toppings/'
 
 class PoptartCreate(CreateView):
   model = Poptart
   fields = '__all__'
+
 
 class PoptartUpdate(UpdateView):
   model = Poptart
@@ -16,6 +30,10 @@ class PoptartUpdate(UpdateView):
 class PoptartDelete(DeleteView):
   model = Poptart
   success_url = '/poptarts/'
+
+class ToppingCreate(CreateView):
+  model = Topping
+  fields = '__all__'
 
 def home(request):
   return HttpResponse('<h1>Hi</h1>')
